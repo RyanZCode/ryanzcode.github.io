@@ -283,7 +283,7 @@ function addMRBTable() {
  */
 function addMRBRows(data, table) {
     for (let i = 0; i < data.length; i++) {
-        if (data[i].mrb === "True") {
+        if (data[i].mrb === "TRUE") {
             addToMRBLocation(data[i], table);
         }
     }
