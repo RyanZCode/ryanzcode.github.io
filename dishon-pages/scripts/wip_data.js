@@ -23,7 +23,7 @@ async function addWIPData() {
  * @returns {Object} - parsed WIP data
  */
 async function getData() {
-    const response = await fetch("http://192.168.1.75/data/wip_data.csv");
+    const response = await fetch("https://ryanzcode.github.io/dishon-pages/data/wip_data.csv");
     return Papa.parse(await response.text(), { header: true }).data;
 }
 

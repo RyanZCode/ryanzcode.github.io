@@ -24,7 +24,7 @@ async function addQualityData() {
  * @returns {Object} - parsed quality data
  */
 async function getData() {
-    const response = await fetch("http://192.168.1.75/data/wo_data.csv");
+    const response = await fetch("https://ryanzcode.github.io/dishon-pages/data/wo_data.csv");
     return Papa.parse(await response.text(), { header: true }).data;
 }
 
