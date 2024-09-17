@@ -1,35 +1,43 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+
+    <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/sp-2.3.1/sl-2.0.3/datatables.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/sp-2.3.1/sl-2.0.3/datatables.min.js"></script>
+
     <link rel="apple-touch-icon" sizes="180x180" href="/dishon-pages/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/dishon-pages/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/dishon-pages/images/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/dishon-pages/images/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script type="text/javascript" src="/dishon-pages/scripts/machine_data.js"></script>
     <link rel="stylesheet" href="styles/stylesheet.css">
-    <title>Lathes/Millturn Monitoring - Dishon Limited</title>
+    <script type="text/javascript" src="/dishon-pages/scripts/wo_data.js"></script>
+    <title>MRB Tracker - Dishon Limited</title>
     <nav class="navbar navbar-dark navbar-expand-md bg-body-secondary" id="navHeader">
         <div class="container">
             <div class="dropdown collapse navbar-collapse">
-                <button class="btn dropdown-toggle me-auto active" type="button" data-bs-toggle="dropdown">
-                    Lathes/Millturn
+                <button class="btn dropdown-toggle me-auto" type="button" data-bs-toggle="dropdown">
+                    Machine Monitoring
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item disabled" style="color:#C6151D" href="/dishon-pages/lami">Lathes/Millturn</a></li>
+                    <li><a class="dropdown-item" href="/dishon-pages/lami">Lathes/Millturn</a></li>
                     <li><a class="dropdown-item" href="/dishon-pages/msax">Mill4ax/Mill5ax</a></li>
                     <li><a class="dropdown-item" href="/dishon-pages/grinding">Grinding</a></li>
                     <li><a class="dropdown-item" href="/dishon-pages/allmachines">All Machines</a></li>
                 </ul>
-                <div id="lamiNavSpacer"></div>
+                <div id="mrbNavSpacer"></div>
             </div>
             <div class="collapse navbar-collapse">
                 <a class="btn navbar-brand mx-auto" href="/dishon" id="logoBox">
@@ -48,23 +56,23 @@
                 <a class="btn ms-auto me-2" type="button" href="/dishon-pages/wipreport">
                     WIP Report
                 </a>
-                <button class="btn dropdown-toggle ms-2" type="button" data-bs-toggle="dropdown">
-                    Work Orders
+                <button class="btn dropdown-toggle active ms-2" type="button" data-bs-toggle="dropdown">
+                    MRB Tracker
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/dishon-pages/quality">Quality Queue</a></li>
-                    <li><a class="dropdown-item" href="/dishon-pages/mrb">MRB Tracker</a></li>
+                    <li><a class="dropdown-item disabled" style="color:#C6151D" href="/dishon-pages/mrb">MRB Tracker</a></li>
                 </ul>
             </div>
             <!-- Elements to show when collapsed -->
             <div class="container collapse d-md-none text-center mt-1" id="openedCol">
                 <div class="btn-group">
                     <div class="dropdown me-1">
-                        <button class="btn dropdown-toggle active" type="button" data-bs-toggle="dropdown">
-                            Lathes/Millturn
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Machine Monitoring
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item disabled" style="color:#C6151D" href="/dishon-pages/lami">Lathes/Millturn</a></li>
+                            <li><a class="dropdown-item" href="/dishon-pages/lami">Lathes/Millturn</a></li>
                             <li><a class="dropdown-item" href="/dishon-pages/msax">Mill4ax/Mill5ax</a></li>
                             <li><a class="dropdown-item" href="/dishon-pages/grinding">Grinding</a></li>
                             <li><a class="dropdown-item" href="/dishon-pages/allmachines">All Machines</a></li>
@@ -76,12 +84,12 @@
                 </a>
                 <div class="btn-group">
                     <div class="dropdown ms-1">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            Work Orders
+                        <button class="btn dropdown-toggle active" type="button" data-bs-toggle="dropdown">
+                            MRB Tracker
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/dishon-pages/quality">Quality Queue</a></li>
-                            <li><a class="dropdown-item" href="/dishon-pages/mrb">MRB Tracker</a></li>
+                            <li><a class="dropdown-item disabled" style="color:#C6151D" href="/dishon-pages/mrb">MRB Tracker</a></li>
                         </ul>
                     </div>
                 </div>
@@ -92,29 +100,42 @@
 
 <body>
     <div class="container-fluid p-2 bg-dark text-white pt-3">
-        <h3>Lathes</h3>
+        <h3>Current Open Work Orders in MRB</h3>
     </div>
-    <div class="container-fluid bg-body-secondary pb-4">
-        <div id="lathes" class="row row-cols-lg-5 g-2 g-lg-3 mx-0 my-0"></div>
-    </div>
-    <div class="container-fluid p-2 bg-dark text-white pt-3">
-        <h3>Millturn</h3>
-    </div>
-    <div class="container-fluid bg-body-secondary pb-4">
-        <div id="millturn" class="row row-cols-lg-5 g-2 g-lg-3 mx-0 my-0"></div>
-    </div>
+    <div class="container-fluid py-2 bg-white" id="tableContainer"></div>
 
     <footer class="footer">
-        <div id="timestamp" class="d-flex p-2 text-muted"></div>
-        <div class="d-flex p-2">
-            <div class="me-auto ms-auto fs-4"><b>Report an issue: https://forms.gle/3bCVEzQkyNp4seWV6</b></div>
-        </div>
+        <div id="timestampContainer" class="d-flex p-2 ms-2 text-muted"></div>
         <div class="d-flex p-2">
             <a class="btn ms-auto ms-auto me-1" data-bs-toggle="modal" data-bs-target="#help-modal">Help</a>
             <a class="btn ms-1 me-1" data-bs-toggle="modal" data-bs-target="#feedback-modal">Feedback</a>
             <a class="btn ms-1 me-auto" data-bs-toggle="modal" data-bs-target="#report-modal">Report an issue</a>
         </div>
     </footer>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="help-modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>The <b>Qty in MRB</b> column shows the total quantity in MRB for that work order.</p>
+                    <p>The <b>Latest MRB Completion Confirmation Date</b> column shows the latest date that any quantity was
+                        put in MRB for that work order.
+                    </p>
+                    <p>The data is as of time it was last updated, shown at the bottom of the screen.</p>
+                    <p>If you notice any discrepancies in the data or have any feedback, feel free to leave feedback
+                        using the feedback or report buttons at the bottom of the screen.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Report Modal -->
     <div class="modal fade" id="report-modal" tabindex="-1" aria-hidden="true">
@@ -126,10 +147,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p3>Experiencing website, monitoring, or other issues? Report an issue
+                        <p3>Experiencing an issue with the MRB Queue? Report an issue
                             here:</p3>
                         <br>
-                        <a class="btn btn-danger ms-1" href="https://formfacade.com/sm/Uapije8EO" target="_blank">Report
+                        <a class="btn btn-danger ms-1 mt-2" href="https://formfacade.com/sm/1p8eDgY3Q"
+                            target="_blank">Report
                             Form</a>
                     </div>
                     <div class="modal-footer">
@@ -152,7 +174,7 @@
                     <div class="modal-body">
                         <p3>Feedback? Let us know here:</p3>
                         <br>
-                        <a class="btn btn-danger ms-1" href="https://formfacade.com/sm/DLRebS0im"
+                        <a class="btn btn-danger ms-1 mt-1" href="https://formfacade.com/sm/DLRebS0im"
                             target="_blank">Feedback Form</a>
                     </div>
                     <div class="modal-footer">
@@ -163,43 +185,11 @@
         </form>
     </div>
 
-    <!-- Help Modal -->
-    <div class="modal fade" id="help-modal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Info</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>A <span class="machine-on">green</span> background indicates that the machine is <b>on</b>
-                        and <b>in cycle</b>.</p>
-                    <p>A <span class="machine-idle">yellow</span> background indicates that the machine is <b>on</b> but
-                        <b>not in cycle</b>.
-                    </p>
-                    <p>A <span class="machine-off">red</span> background indicates that the machine is <b>off</b>.
-                    </p>
-                    <p>The percentage values indicate the uptime percentage <i>(how long the machine has been in cycle
-                            for)</i> of the machine over the last <b>24 hours</b>.</p>
-                    <p>The data refers to the time it was last updated, shown at the bottom of the screen.</p>
-                    <p>If you notice any discrepancies in the data or have any feedback, feel free to leave feedback
-                        using the feedback or report buttons at the bottom of the screen.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         // On page load, add data
-        getLaMiStatus();
-
-        // Every second, re-add data
-        setInterval(function () {
-            getLaMiStatus();
-        }, 1000);
+        document.addEventListener("DOMContentLoaded", function (event) {
+            addMRBData();
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
